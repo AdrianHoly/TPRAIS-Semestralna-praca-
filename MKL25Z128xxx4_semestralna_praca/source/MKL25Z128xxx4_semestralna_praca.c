@@ -102,6 +102,7 @@ void delay(int Milisekundy) {
 
 void commit(){
 	int abvcadsasfasfa = 0;
+	int asdasdasdasd = 1;
 }
 
 
