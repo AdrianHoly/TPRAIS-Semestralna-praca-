@@ -100,9 +100,12 @@ void delay(int Milisekundy) {
 	__asm("nop");
 }
 
+void commit(){
+	int abvcadsasfasfa = 0;
+}
 
 
-
+//len skusam zmenu v commite
 
 int main(void) {
 
