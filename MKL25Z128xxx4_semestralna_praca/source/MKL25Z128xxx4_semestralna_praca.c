@@ -72,7 +72,6 @@ void Rozsviet_LED(){
 	uint8_t CRC8_Data_Length = sizeof(CRC8_Data);
 	uint8_t LED_P[] = {Sprava_Data, 0x10, Adresa_MCU, 0x01, 0x01, crc8(CRC8_Data,CRC8_Data_Length)};
 	LPSCI_WriteBlocking(DEMO_LPSCI, LED_P, sizeof(LED_P));
-
 	}
 }
 
@@ -100,13 +99,28 @@ void delay(int Milisekundy) {
 	__asm("nop");
 }
 
-void commit(){
-	int abvcadsasfasfa = 0;
-	int asdasdasdasd = 1;
+//https://www.cs.cornell.edu/~tomf/notes/cps104/twoscomp.html
+//pouzity dvojkovy doplnok
+//na jednotlive prevody som pouzil prog kalk.
+//0000 0000 0000 0000 0000 0000 0110 0100     //dec 100 // up
+// 0 0 0 0 0 0 6 4
+//1111 1111 1111 1111 1111 1111 1001 1011     //spravena inverzia
+//1111 1111 1111 1111 1111 1111 1001 1100     // +1
+// F F F F F F 9 C  // FF FF FF 9C            // -100   // down
+// MSB
+void Motor_Up_Movement(){
+	uint8_t CRC8_Data[] = { 0xf1,0x00, 0x02, 0x64, 0x00, 0x00, 0x00 };
+	uint8_t CRC8_Data_Length = sizeof(CRC8_Data);
+	uint8_t Move_Up[] = {Sprava_Data, 0xf1, Adresa_MCU, 0x05, 0x02, 0x64, 0x00, 0x00, 0x00, crc8(CRC8_Data,CRC8_Data_Length)};
+	LPSCI_WriteBlocking(DEMO_LPSCI, Move_Up, sizeof(Move_Up));
 }
 
-
-//len skusam zmenu v commite
+void Motor_Down_Movement(){
+	uint8_t CRC8_Data[] = { 0xf1,0x00, 0x02, 0x9C, 0xFF, 0xFF, 0xFF };
+	uint8_t CRC8_Data_Length = sizeof(CRC8_Data);
+	uint8_t Move_Down[] = {Sprava_Data, 0xf1, Adresa_MCU, 0x05, 0x02, 0x9C, 0xFF, 0xFF, 0xFF, crc8(CRC8_Data,CRC8_Data_Length)};
+	LPSCI_WriteBlocking(DEMO_LPSCI, Move_Down, sizeof(Move_Down));
+}
 
 int main(void) {
 
@@ -134,9 +148,11 @@ int main(void) {
     		Rozsviet_LED();
             if(Sprava[2]==0xc0){
     		Door_Close();
+    		Motor_Down_Movement();
             }
             if(Sprava[2]==0xc4){
             Door_Open();
+            Motor_Up_Movement();
             }
     		Index=0;
     		Sprava_Complete = 0;
