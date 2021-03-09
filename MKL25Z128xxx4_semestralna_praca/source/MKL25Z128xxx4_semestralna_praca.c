@@ -25,8 +25,8 @@ volatile uint8_t Sprava_Complete = 0;
 volatile uint8_t LED_P_OUT, LED_1_OUT, LED_2_OUT, LED_3_OUT, LED_4_OUT = 0;
 volatile uint8_t LED_P_IN, LED_1_IN, LED_2_IN, LED_3_IN, LED_4_IN = 0;
 volatile uint8_t Switch_e0, Switch_e1, Switch_e2, Switch_e3, Switch_e4 = 0;
-volatile uint8_t Destination = 0;
-volatile uint8_t Poloha_Actual = 0;
+volatile uint8_t Destination, Destination_Display = 0;
+volatile uint8_t Poloha_Actual,Poloha_Actual_Display = 0;
 volatile uint8_t Last_Known_Movement = 10; // 1 hore, 0 dole, 2 stop
 
 
@@ -222,7 +222,7 @@ void Stop_Floor (){
 	if(Sprava[2]== 0xe0){
 		if( Switch_e0 == 1){
 		Motor_Stop();
-		delay(200);
+		delay(500);
 		Door_Open();
 		delay(1000);
 		Door_Close();
@@ -235,7 +235,7 @@ void Stop_Floor (){
 	if(Sprava[2]== 0xe1){
 		if( Switch_e1 == 1){
 		Motor_Stop();
-		delay(200);
+		delay(500);
 		Door_Open();
 		delay(1000);
 		Door_Close();
@@ -248,7 +248,7 @@ void Stop_Floor (){
 	if(Sprava[2]== 0xe2){
 		if( Switch_e2 == 1){
 		Motor_Stop();
-		delay(200);
+		delay(500);
 		Door_Open();
 		delay(1000);
 		Door_Close();
@@ -261,7 +261,7 @@ void Stop_Floor (){
 	if(Sprava[2]== 0xe3){
 		if( Switch_e3 == 1){
 		Motor_Stop();
-		delay(200);
+		delay(500);
 		Door_Open();
 		delay(1000);
 		Door_Close();
@@ -274,7 +274,7 @@ void Stop_Floor (){
 	if(Sprava[2]== 0xe4){
 		if( Switch_e4 == 1){
 		Motor_Stop();
-		delay(200);
+		delay(500);
 		Door_Open();
 		delay(1000);
 		Door_Close();
@@ -349,7 +349,7 @@ void Zhasni_LED_IN(){
 	    LED_2_IN = 0;
 		}
 	if(Sprava[2]==0xe3){
-		uint8_t CRC8_Data[] = { 0x13,0x00, 0x00 };
+		uint8_t CRC8_Data[] = { 0x23,0x00, 0x00 };
 	    uint8_t CRC8_Data_Length = sizeof(CRC8_Data);
 	    uint8_t LED[] = {Sprava_Data, 0x23, Adresa_MCU, 0x01, 0x00, crc8(CRC8_Data,CRC8_Data_Length)};
 	    LPSCI_WriteBlocking(DEMO_LPSCI, LED, sizeof(LED));
@@ -484,6 +484,70 @@ void Set_Destination(){
 		}
 }
 
+/*void Emergency_Break_Active(){
+	uint8_t CRC8_Data[] = { 0xf,0x00, 0x01 };
+    uint8_t CRC8_Data_Length = sizeof(CRC8_Data);
+    uint8_t Break[] = {Sprava_Data, 0xf, Adresa_MCU, 0x01, 0x01, crc8(CRC8_Data,CRC8_Data_Length)};
+    LPSCI_WriteBlocking(DEMO_LPSCI, Break, sizeof(Break));
+    delay(1000);
+}
+
+void Emergency_Break_Deactive(){
+	uint8_t CRC8_Data[] = { 0xf,0x00, 0x00 };
+    uint8_t CRC8_Data_Length = sizeof(CRC8_Data);
+    uint8_t Break[] = {Sprava_Data, 0xf, Adresa_MCU, 0x01, 0x00, crc8(CRC8_Data,CRC8_Data_Length)};
+    LPSCI_WriteBlocking(DEMO_LPSCI, Break, sizeof(Break));
+}*/
+
+void Set_Display_Value(){
+	if(Poloha_Actual== 0xe0){
+		Poloha_Actual_Display = 0x50;
+	}
+	if(Poloha_Actual== 0xe1){
+		Poloha_Actual_Display = 0x31;
+	}
+	if(Poloha_Actual== 0xe2){
+		Poloha_Actual_Display = 0x32;
+	}
+	if(Poloha_Actual== 0xe3){
+		Poloha_Actual_Display = 0x33;
+	}
+	if(Poloha_Actual== 0xe4){
+		Poloha_Actual_Display = 0x34;
+	}
+	if(Last_Known_Movement == 0){
+		Destination_Display = 0x02;
+	}
+	if(Last_Known_Movement == 1){
+		Destination_Display = 0x01;
+	}
+	if(Last_Known_Movement == 2){
+		Destination_Display = 0x00;
+	}
+}
+
+void Display(uint8_t Direction_Display, uint8_t Floor_Display){
+	uint8_t CRC8_Data[] = { 0x30,0x00, Direction_Display , Floor_Display };
+	uint8_t CRC8_Data_Length = sizeof(CRC8_Data);
+    uint8_t Info[] = {Sprava_Data, 0x30, Adresa_MCU, 0x02, Direction_Display ,Floor_Display, crc8(CRC8_Data,CRC8_Data_Length)};
+    LPSCI_WriteBlocking(DEMO_LPSCI, Info, sizeof(Info));
+}
+
+void Last_Know_Movement_Setter(){
+if(Last_Known_Movement == 1){
+	Motor_Up_Movement();
+	//Display(Destination_Display, Poloha_Actual_Display);
+}
+if (Last_Known_Movement == 0){
+	Motor_Down_Movement();
+	//Display(Destination_Display, Poloha_Actual_Display);
+}
+if(Last_Known_Movement == 2){
+	Motor_Stop();
+	//Display(Destination_Display, Poloha_Actual_Display);
+}
+}
+
 int main(void) {
 
 	lpsci_config_t config;
@@ -511,19 +575,18 @@ int main(void) {
 		    		Rozsviet_LED_OUT();
 		    		Rozsviet_LED_IN();
 		    		LED_SWITCH_SETTER();
+
+                    //delay(5);
 		    		Stop_Floor();
+		    		/*if(Sprava[2]==0xf ){
+		    			Emergency_Break_Active();
+		    			Emergency_Break_Deactive();
+		    		}*/
+		    		Set_Display_Value();
 		    		if(Poloha_Actual==Destination){
 		    			Set_Destination();
 		    		}
-		    		if(Last_Known_Movement == 1){
-		    			Motor_Up_Movement();
-		    		}
-		    		if (Last_Known_Movement == 0){
-		    			Motor_Down_Movement();
-		    		}
-		    		if(Last_Known_Movement == 2){
-		    			Motor_Stop();
-		    		}
+		    		Last_Know_Movement_Setter();
 		    		Index=0;
 		    		Sprava_Complete = 0;
 		    	}
