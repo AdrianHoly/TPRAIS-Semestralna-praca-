@@ -71,8 +71,6 @@ void Send_ACK_Demo(uint8_t Adresa_Prijatej_spravy){
 	LPSCI_WriteBlocking(DEMO_LPSCI, CRC8_ACK, sizeof(CRC8_ACK));
 }
 
-
-
 void Rozsviet_LED_OUT(){
 	if(Sprava[2]==0xc0){ //LED PRIZEMIE VONKAJSI TERMINAL
 	    uint8_t CRC8_Data[] = { 0x10,0x00, 0x01 };
@@ -149,9 +147,6 @@ void Rozsviet_LED_IN(){
 	}
 }
 
-
-
-
 void Door_Open(){
 	uint8_t CRC8_Data[] = { 0xf0,0x00, 0x00 };
     uint8_t CRC8_Data_Length = sizeof(CRC8_Data);
@@ -172,8 +167,6 @@ void delay(int Milisekundy) {
 		i++;
 		__asm("nop");
 	}
-
-
 }
 
 
@@ -233,10 +226,9 @@ void Stop_Floor (){
 		Door_Open();
 		delay(1000);
 		Door_Close();
-
 		Switch_e0 = 0;
 		Zhasni_LED_OUT();
-
+		Zhasni_LED_IN();
 		}
 		Poloha_Actual = 0xe0;
 	}
@@ -247,10 +239,9 @@ void Stop_Floor (){
 		Door_Open();
 		delay(1000);
 		Door_Close();
-
 		Switch_e1 = 0;
 		Zhasni_LED_OUT();
-
+		Zhasni_LED_IN();
 		}
 		Poloha_Actual = 0xe1;
 	}
@@ -261,10 +252,9 @@ void Stop_Floor (){
 		Door_Open();
 		delay(1000);
 		Door_Close();
-
 		Switch_e2 = 0;
 		Zhasni_LED_OUT();
-
+		Zhasni_LED_IN();
 		}
 		Poloha_Actual = 0xe2;
 	}
@@ -275,10 +265,9 @@ void Stop_Floor (){
 		Door_Open();
 		delay(1000);
 		Door_Close();
-
 		Switch_e3 = 0;
 		Zhasni_LED_OUT();
-
+		Zhasni_LED_IN();
 		}
 		Poloha_Actual = 0xe3;
 	}
@@ -289,11 +278,9 @@ void Stop_Floor (){
 		Door_Open();
 		delay(1000);
 		Door_Close();
-
-
 		Switch_e4 = 0;
 		Zhasni_LED_OUT();
-
+		Zhasni_LED_IN();
 		}
 		Poloha_Actual = 0xe4;
 	}
@@ -335,6 +322,45 @@ void Zhasni_LED_OUT(){
 	    uint8_t LED[] = {Sprava_Data, 0x14, Adresa_MCU, 0x01, 0x00, crc8(CRC8_Data,CRC8_Data_Length)};
 	    LPSCI_WriteBlocking(DEMO_LPSCI, LED, sizeof(LED));
 	    LED_4_OUT = 0;
+		}
+}
+
+void Zhasni_LED_IN(){
+	if(Sprava[2]==0xe0){
+		uint8_t CRC8_Data[] = { 0x20,0x00, 0x00 };
+	    uint8_t CRC8_Data_Length = sizeof(CRC8_Data);
+	    uint8_t LED[] = {Sprava_Data, 0x20, Adresa_MCU, 0x01, 0x00, crc8(CRC8_Data,CRC8_Data_Length)};
+	    LPSCI_WriteBlocking(DEMO_LPSCI, LED, sizeof(LED));
+	    LED_P_IN = 0;
+		}
+	if(Sprava[2]==0xe1){
+		uint8_t CRC8_Data[] = { 0x21,0x00, 0x00 };
+	    uint8_t CRC8_Data_Length = sizeof(CRC8_Data);
+	    uint8_t LED[] = {Sprava_Data, 0x21, Adresa_MCU, 0x01, 0x00, crc8(CRC8_Data,CRC8_Data_Length)};
+	    LPSCI_WriteBlocking(DEMO_LPSCI, LED, sizeof(LED));
+	    LED_1_IN = 0;
+		}
+
+	if(Sprava[2]==0xe2){
+		uint8_t CRC8_Data[] = { 0x22,0x00, 0x00 };
+	    uint8_t CRC8_Data_Length = sizeof(CRC8_Data);
+	    uint8_t LED[] = {Sprava_Data, 0x22, Adresa_MCU, 0x01, 0x00, crc8(CRC8_Data,CRC8_Data_Length)};
+	    LPSCI_WriteBlocking(DEMO_LPSCI, LED, sizeof(LED));
+	    LED_2_IN = 0;
+		}
+	if(Sprava[2]==0xe3){
+		uint8_t CRC8_Data[] = { 0x13,0x00, 0x00 };
+	    uint8_t CRC8_Data_Length = sizeof(CRC8_Data);
+	    uint8_t LED[] = {Sprava_Data, 0x23, Adresa_MCU, 0x01, 0x00, crc8(CRC8_Data,CRC8_Data_Length)};
+	    LPSCI_WriteBlocking(DEMO_LPSCI, LED, sizeof(LED));
+	    LED_3_IN = 0;
+		}
+	if(Sprava[2]==0xe4){
+		uint8_t CRC8_Data[] = { 0x24,0x00, 0x00 };
+	    uint8_t CRC8_Data_Length = sizeof(CRC8_Data);
+	    uint8_t LED[] = {Sprava_Data, 0x24, Adresa_MCU, 0x01, 0x00, crc8(CRC8_Data,CRC8_Data_Length)};
+	    LPSCI_WriteBlocking(DEMO_LPSCI, LED, sizeof(LED));
+	    LED_4_IN = 0;
 		}
 }
 
