@@ -21,13 +21,14 @@
 #define Adresa_MCU 0x00
 
 volatile uint8_t Sprava[10], Index = 0;
-volatile uint8_t Index_Hranica = 4;
 volatile uint8_t Sprava_Complete = 0;
 volatile uint8_t LED_P_OUT, LED_1_OUT, LED_2_OUT, LED_3_OUT, LED_4_OUT = 0;
 volatile uint8_t LED_P_IN, LED_1_IN, LED_2_IN, LED_3_IN, LED_4_IN = 0;
 volatile uint8_t Switch_e0, Switch_e1, Switch_e2, Switch_e3, Switch_e4 = 0;
-volatile uint8_t Motor_Down_Movement_Status,Motor_Up_Movement_Status = 0;
-volatile uint8_t Destination = 0xe4;
+volatile uint8_t Destination = 0;
+volatile uint8_t Poloha_Actual = 0;
+volatile uint8_t Last_Known_Movement = 10; // 1 hore, 0 dole, 2 stop
+
 
 void DEMO_LPSCI_IRQHandler(void) {
 	if ((kLPSCI_RxDataRegFullFlag) & LPSCI_GetStatusFlags(DEMO_LPSCI)) {
@@ -225,6 +226,20 @@ void LED_SWITCH_SETTER(){
 }
 
 void Stop_Floor (){
+	if(Sprava[2]== 0xe0){
+		if( Switch_e0 == 1){
+		Motor_Stop();
+		delay(200);
+		Door_Open();
+		delay(1000);
+		Door_Close();
+
+		Switch_e0 = 0;
+		Zhasni_LED_OUT();
+
+		}
+		Poloha_Actual = 0xe0;
+	}
 	if(Sprava[2]== 0xe1){
 		if( Switch_e1 == 1){
 		Motor_Stop();
@@ -232,15 +247,12 @@ void Stop_Floor (){
 		Door_Open();
 		delay(1000);
 		Door_Close();
-		if(Motor_Down_Movement_Status==1){
-			Motor_Down_Movement();
-		}
-		if(Motor_Up_Movement_Status==1){
-			Motor_Up_Movement();
-		}
+
 		Switch_e1 = 0;
 		Zhasni_LED_OUT();
+
 		}
+		Poloha_Actual = 0xe1;
 	}
 	if(Sprava[2]== 0xe2){
 		if( Switch_e2 == 1){
@@ -249,15 +261,12 @@ void Stop_Floor (){
 		Door_Open();
 		delay(1000);
 		Door_Close();
-		if(Motor_Down_Movement_Status==1){
-			Motor_Down_Movement();
-		}
-		if(Motor_Up_Movement_Status==1){
-			Motor_Up_Movement();
-		}
+
 		Switch_e2 = 0;
 		Zhasni_LED_OUT();
+
 		}
+		Poloha_Actual = 0xe2;
 	}
 	if(Sprava[2]== 0xe3){
 		if( Switch_e3 == 1){
@@ -266,15 +275,27 @@ void Stop_Floor (){
 		Door_Open();
 		delay(1000);
 		Door_Close();
-		if(Motor_Down_Movement_Status==1){
-			Motor_Down_Movement();
-		}
-		if(Motor_Up_Movement_Status==1){
-			Motor_Up_Movement();
-		}
+
 		Switch_e3 = 0;
 		Zhasni_LED_OUT();
+
 		}
+		Poloha_Actual = 0xe3;
+	}
+	if(Sprava[2]== 0xe4){
+		if( Switch_e4 == 1){
+		Motor_Stop();
+		delay(200);
+		Door_Open();
+		delay(1000);
+		Door_Close();
+
+
+		Switch_e4 = 0;
+		Zhasni_LED_OUT();
+
+		}
+		Poloha_Actual = 0xe4;
 	}
 }
 
@@ -317,58 +338,146 @@ void Zhasni_LED_OUT(){
 		}
 }
 
-void Movement_Up_Down(){
-	if(Sprava[2]==Destination){
-		Destination = 0xe4;
-		Motor_Stop();
-		delay(200);
-		Door_Open();
-		Zhasni_LED_OUT();
-	    delay(1000);
-	    Door_Close();
-	    Motor_Up_Movement();
-	    Motor_Up_Movement_Status=1;
-		Motor_Down_Movement_Status=0;
+void Motor_Go_To_0(){
+    if(Poloha_Actual == 0xe4){
+    	Motor_Down_Movement();
+    	Last_Known_Movement = 0;
+    }
+    if(Poloha_Actual == 0xe3){
+    	Motor_Down_Movement();
+    	Last_Known_Movement = 0;
+    }
+    if(Poloha_Actual == 0xe2){
+    	Motor_Down_Movement();
+    	Last_Known_Movement = 0;
+    }
+    if(Poloha_Actual == 0xe1){
+    	Motor_Down_Movement();
+    	Last_Known_Movement = 0;
+    }
 
+}
+void Motor_Go_To_1(){
+    if(Poloha_Actual == 0xe4){
+    	Motor_Down_Movement();
+    	Last_Known_Movement = 0;
+    }
+    if(Poloha_Actual == 0xe3){
+    	Motor_Down_Movement();
+    	Last_Known_Movement = 0;
+    }
+    if(Poloha_Actual == 0xe2){
+    	Motor_Down_Movement();
+    	Last_Known_Movement = 0;
+    }
+    if(Poloha_Actual == 0xe0){
+    	Motor_Up_Movement();
+    	Last_Known_Movement = 1;
+    }
+}
+void Motor_Go_To_2(){
+    if(Poloha_Actual == 0xe4){
+    	Motor_Down_Movement();
+    	Last_Known_Movement = 0;
+    }
+    if(Poloha_Actual == 0xe3){
+    	Motor_Down_Movement();
+    	Last_Known_Movement = 0;
+    }
+    if(Poloha_Actual == 0xe1){
+    	Motor_Up_Movement();
+    	Last_Known_Movement = 1;
+    }
+    if(Poloha_Actual == 0xe0){
+    	Motor_Up_Movement();
+    	Last_Known_Movement = 1;
+    }
+}
+void Motor_Go_To_3(){
+    if(Poloha_Actual == 0xe4){
+    	Motor_Down_Movement();
+    	Last_Known_Movement = 0;
+    }
+    if(Poloha_Actual == 0xe2){
+    	Motor_Up_Movement();
+    	Last_Known_Movement = 1;
+    }
+    if(Poloha_Actual == 0xe1){
+    	Motor_Up_Movement();
+    	Last_Known_Movement = 1;
+    }
+    if(Poloha_Actual == 0xe0){
+    	Motor_Up_Movement();
+    	Last_Known_Movement = 1;
+    }
+
+}
+void Motor_Go_To_4(){
+    if(Poloha_Actual == 0xe0){
+    	Motor_Up_Movement();
+    	Last_Known_Movement = 1;
+    }
+    if(Poloha_Actual == 0xe3){
+    	Motor_Up_Movement();
+    	Last_Known_Movement = 1;
+    }
+    if(Poloha_Actual == 0xe2){
+    	Motor_Up_Movement();
+    	Last_Known_Movement = 1;
+    }
+    if(Poloha_Actual == 0xe1){
+    	Motor_Up_Movement();
+    	Last_Known_Movement = 1;
+    }
+}
+
+
+
+
+void Set_Destination(){
+	Last_Known_Movement=2;
+	if(Switch_e4==1){
+	    Destination = 0xe4;
+	    Motor_Go_To_4();
 	}
-
-	if(Sprava[2]==Destination){
+	if(Switch_e3==1){
+		Destination = 0xe3;
+		Motor_Go_To_3();
+		}
+	if(Switch_e2==1){
+		Destination = 0xe2;
+		Motor_Go_To_2();
+		}
+	if(Switch_e1==1){
+		Destination = 0xe1;
+		Motor_Go_To_1();
+		}
+	if(Switch_e0==1){
 		Destination = 0xe0;
-		Motor_Stop();
-		delay(200);
-		Door_Open();
-		Zhasni_LED_OUT();
-		delay(1000);
-		Door_Close();
-		Motor_Down_Movement();
-		Motor_Down_Movement_Status=1;
-		Motor_Up_Movement_Status=0;
-
-	}
-
+		Motor_Go_To_0();
+		}
 }
 
 int main(void) {
 
 	lpsci_config_t config;
-
 		BOARD_InitPins();
 		BOARD_BootClockRUN();
 		CLOCK_SetLpsci0Clock(0x1U);
-
 		LPSCI_GetDefaultConfig(&config);
 		config.baudRate_Bps = BOARD_DEBUG_UART_BAUDRATE;
 		config.enableTx = true;
 		config.enableRx = true;
-
 		LPSCI_Init(DEMO_LPSCI, &config, DEMO_LPSCI_CLK_FREQ);
-
 		/* Enable RX interrupt. */
 		LPSCI_EnableInterrupts(DEMO_LPSCI, kLPSCI_RxDataRegFullInterruptEnable);
 		EnableIRQ(DEMO_LPSCI_IRQn);
+
         Door_Close();
         delay(100);
         Motor_Up_Movement();
+        Destination = 0xe4;
+        Switch_e4=1;
 		while(1) {
 		    	if (Sprava_Complete == 1) {
 		    		Send_ACK_Demo(Sprava[2]);
@@ -376,9 +485,19 @@ int main(void) {
 		    		Rozsviet_LED_OUT();
 		    		Rozsviet_LED_IN();
 		    		LED_SWITCH_SETTER();
-		    		delay(10);
-		    		Movement_Up_Down();
 		    		Stop_Floor();
+		    		if(Poloha_Actual==Destination){
+		    			Set_Destination();
+		    		}
+		    		if(Last_Known_Movement == 1){
+		    			Motor_Up_Movement();
+		    		}
+		    		if (Last_Known_Movement == 0){
+		    			Motor_Down_Movement();
+		    		}
+		    		if(Last_Known_Movement == 2){
+		    			Motor_Stop();
+		    		}
 		    		Index=0;
 		    		Sprava_Complete = 0;
 		    	}
