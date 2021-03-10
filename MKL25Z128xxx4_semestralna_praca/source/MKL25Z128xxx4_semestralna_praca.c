@@ -27,7 +27,8 @@ volatile uint8_t Destination, Destination_Display = 0;
 volatile uint8_t Poloha_Actual, Poloha_Actual_Display = 0;
 volatile uint8_t Last_Known_Movement = 10; // 1 hore, 0 dole, 2 stop
 volatile uint8_t Door_Status = 5; // 1=open, 0=closed
-uint8_t Motor_Stop_Control, Motor_Up_Control, Motor_Down_Control = 0; // korekcia aby sa neposielali spravy nonstop
+volatile uint8_t Motor_Stop_Control, Motor_Up_Control, Motor_Down_Control = 0; // korekcia aby sa neposielali spravy nonstop
+uint8_t commitpremenna = 0;
 
 void DEMO_LPSCI_IRQHandler(void) {
 	if ((kLPSCI_RxDataRegFullFlag) & LPSCI_GetStatusFlags(DEMO_LPSCI)) {
@@ -615,6 +616,8 @@ void Stop_Floor() {
 		}
 	}
 }
+
+
 
 int main(void) {
 
