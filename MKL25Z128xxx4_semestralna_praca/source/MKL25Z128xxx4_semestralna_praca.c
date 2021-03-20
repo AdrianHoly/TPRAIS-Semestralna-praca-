@@ -1,4 +1,3 @@
-
 #include "board.h"
 #include <Premenne.h>
 #include <Send_Funkcie.h>
@@ -8,6 +7,13 @@
 #include <Stop_Floor_Function.h>
 #include <Led_And_Movement.h>
 
+//funkcia, ktorá napĺňa samotnú správu. Volá sa pomocou interruptu.
+//veľkosť správy je nastavená natvrdo (hodnota 4 (veľkost 5 kedže indexujem od 0)
+//- t.j. start byte/ adresa prijimaca / adresa odosielatela / dáta (pri väčšine pripadov 0)/CRC kód )
+//ako náhle dosiahne indexu hodnotu 4 tak sa nastaví globálna premenná Sprava_Complete na hodnotu 1
+
+//kLPSCI_RxDataRegFullFlag sa nastaví ak je Rx Data buffer plný
+//
 void DEMO_LPSCI_IRQHandler(void) {
 	if ((kLPSCI_RxDataRegFullFlag) & LPSCI_GetStatusFlags(DEMO_LPSCI)) {
 		Sprava[Index] = LPSCI_ReadByte(DEMO_LPSCI);
@@ -21,9 +27,9 @@ void DEMO_LPSCI_IRQHandler(void) {
 }
 
 
-
 int main(void) {
 
+	//základné inicializácie
 	lpsci_config_t config;
 	BOARD_InitPins();
 	BOARD_BootClockRUN();
@@ -32,8 +38,8 @@ int main(void) {
 	config.baudRate_Bps = BOARD_DEBUG_UART_BAUDRATE;
 	config.enableTx = true;
 	config.enableRx = true;
+	//inicializácia interruptu
 	LPSCI_Init(DEMO_LPSCI, &config, DEMO_LPSCI_CLK_FREQ);
-	/* Enable RX interrupt. */
 	LPSCI_EnableInterrupts(DEMO_LPSCI, kLPSCI_RxDataRegFullInterruptEnable);
 	EnableIRQ(DEMO_LPSCI_IRQn);
 
