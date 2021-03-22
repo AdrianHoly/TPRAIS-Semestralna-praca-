@@ -18,6 +18,8 @@
  * prislúchajúca premenná switch_e% na hodnotu 1
  */
 
+#include <Led_And_Movement.h>
+
 void LED_and_Switch_Setter_On() {
 	if (Sprava[2] == 0xc0 || Sprava[2] == 0xb0) {
 		LED_P_OUT = 1;

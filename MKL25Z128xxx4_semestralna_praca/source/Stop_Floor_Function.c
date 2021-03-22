@@ -8,7 +8,7 @@
 /**
  * @file    Stop_Floor_Function.c
  * @brief   zastavenie vytahu na poschodi
- * @details //funkcia vytvorena pre zastavenie výťahu v prípade, že prechádza cez poschodie
+ * @details funkcia vytvorena pre zastavenie výťahu v prípade, že prechádza cez poschodie
  * ktorého switch je v stave "Active" aj keď daný switch nieje zapísaný ako "Destination"
  *
  */

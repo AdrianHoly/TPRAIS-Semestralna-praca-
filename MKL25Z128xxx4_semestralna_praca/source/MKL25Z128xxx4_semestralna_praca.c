@@ -24,7 +24,7 @@
 
 
 void DEMO_LPSCI_IRQHandler(void) {
-	if ((kLPSCI_RxDataRegFullFlag) & LPSCI_GetStatusFlags(DEMO_LPSCI)) {
+	if (kLPSCI_RxDataRegFullFlag) {
 		Sprava[Index] = LPSCI_ReadByte(DEMO_LPSCI);
 		if (Index != 4) {
 			Index++;
