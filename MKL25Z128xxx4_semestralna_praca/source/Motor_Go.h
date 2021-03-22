@@ -4,6 +4,11 @@
  *  Created on: 15. 3. 2021
  *      Author: Ado
  */
+
+/**
+ * @file    Motor_Go.h
+ * @brief   Motor_Go.c kniznica
+ */
 #include <Definicie.h>
 
 #ifndef MOTOR_GO_H_

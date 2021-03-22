@@ -5,9 +5,17 @@
  *      Author: Ado
  */
 
+/**
+ * @file    CRC8.c
+ * @brief   CRC8 kod
+ * @details funkcia pre výpočet CRC8
+ *
+ */
 #include <CRC8.h>
-//funkcia pre výpočet CRC8
-//zdroj: https://www.devcoons.com/crc8/
+/*!
+ * zdroj: https://www.devcoons.com/crc8/
+ */
+
 char crc8(const unsigned char *data, const unsigned int length) {
 	char crc = 0x00;
 	char extract;

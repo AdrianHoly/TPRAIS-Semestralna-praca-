@@ -4,6 +4,11 @@
  *  Created on: 15. 3. 2021
  *      Author: Ado
  */
+
+/**
+ * @file    Premenne.h
+ * @brief   kniznica premennych
+ */
 #include <Definicie.h>
 
 #ifndef PREMENNE_H_

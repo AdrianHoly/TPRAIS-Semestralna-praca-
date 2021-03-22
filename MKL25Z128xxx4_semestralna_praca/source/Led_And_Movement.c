@@ -4,13 +4,20 @@
  *  Created on: 17. 3. 2021
  *      Author: Ado
  */
-// v tejto knižnici sú umiestnené hlavne funckie kde operujem s globálnymi premennými
-// funkcie sú zamerané na LED a pohybové globálne premenné
-#include <Led_And_Movement.h>
 
-// ak prijmem správu z tlačidla vonkajšieho alebo vnútorného terminálu
-// tak sa prestavia hodnoty LED na príslušnom poschodí na 1 a tiež sa nastaví
-// prislúchajúca premenná switch_e% na hodnotu 1
+/**
+ * @file    Led_And_Movement.c
+ * @brief   funkcie s globalnymi premennymi
+ * @details v tejto knižnici sú umiestnené hlavne funckie kde operujem s globálnymi premennými
+ *  funkcie sú zamerané na LED a pohybové globálne premenné
+ *
+ */
+/*!
+ * ak prijmem správu z tlačidla vonkajšieho alebo vnútorného terminálu
+ * tak sa prestavia hodnoty LED na príslušnom poschodí na 1 a tiež sa nastaví
+ * prislúchajúca premenná switch_e% na hodnotu 1
+ */
+
 void LED_and_Switch_Setter_On() {
 	if (Sprava[2] == 0xc0 || Sprava[2] == 0xb0) {
 		LED_P_OUT = 1;
@@ -39,14 +46,16 @@ void LED_and_Switch_Setter_On() {
 	}
 }
 
-//na začiatku sa nastaví hodnota Last_Known_Movement na hodnotu 2 (t.j. stop pohyb)
-// tento krok som spravil v dôsledku korekcie funkcie, ku ktorej dochádzalo hlavne
-// ked bolo stlačených viacej tlačidiel naraz (hlavne v iných smeroch)
-
-// (Switch_e4 == 1 && Last_Known_Movement == 2 )
-// ak je aktívny switch a zároveň Last_Known_Movement je na hodnote 2
-// ak by podmienka nezahrnovala LKM podmienku, tak pri dalsej podmienke by
-// bolo možné prebiť aktuálny smer výťahu, čo by malo za následok zastavenie výťahu
+/*!
+ * na začiatku sa nastaví hodnota Last_Known_Movement na hodnotu 2 (t.j. stop pohyb)
+ * tento krok som spravil v dôsledku korekcie funkcie, ku ktorej dochádzalo hlavne
+ * ked bolo stlačených viacej tlačidiel naraz (hlavne v iných smeroch)
+ *
+ * (Switch_e4 == 1 && Last_Known_Movement == 2 )
+ * ak je aktívny switch a zároveň Last_Known_Movement je na hodnote 2
+ * ak by podmienka nezahrnovala LKM podmienku, tak pri dalsej podmienke by
+ * bolo možné prebiť aktuálny smer výťahu, čo by malo za následok zastavenie výťahu
+ */
 
 void Set_Destination() {
 	Last_Known_Movement = 2;
@@ -77,19 +86,22 @@ void Set_Destination() {
 	}
 }
 
+/*!
+ * funkcia vznikla za účelom zavretia dverí po tom čo výťah zastaví na príslušnom poschodí
+ * LKM values = 1 smer hore, 0 smer dole, 2 stop
+ * Motor_Control premenne su pouzite ako korekcia aby sa neposielali spravy viackrát
+ * kedže táto funkcia nieje v maine ohraničená žiadnou podmienkou tak sa vykoná stále
+ *
+ * príklad:
+ * ak je LKM 1 (t.j. výťah išiel smerom hore), tak sa nastavia control premenné ostatných smerov na hodnotu 0
+ * aby sme ich mohli do budúcnosti použiť ak je Motor_Control príslušného smeru nastavená na 0 a dvere sú v
+ * stave "OPEN" (t.j. Door_Status == 1) a ak je akýkoľvek iný switch v stave "Active" (myslené Switch_e% == 1)
+ * tak sa dvere zavrú aby mohol výťah korektne pokračovať ďalej v jazde. pokiaľ nieje žiaden iný switch "Active"
+ *  tak dvere zostanú otvorené a výťah čaká na "privolanie" následne sa pošle správa pre vykonávanie príslušneho
+ *   smeru a nastavenie príslušnej Motor_Control premennej na hodnotu 1.
+ */
 
-// funkcia vznikla za účelom zavretia dverí po tom čo výťah zastaví na príslušnom poschodí
-//LKM values = 1 smer hore, 0 smer dole, 2 stop
-// Motor_Control premenne su pouzite ako korekcia aby sa neposielali spravy viackrát
-// kedže táto funkcia nieje v maine ohraničená žiadnou podmienkou tak sa vykoná stále
 
-//príklad:
-// ak je LKM 1 (t.j. výťah išiel smerom hore), tak sa nastavia control premenné ostatných smerov na hodnotu 0
-// aby sme ich mohli do budúcnosti použiť
-// ak je Motor_Control príslušného smeru nastavená na 0 a dvere sú v stave "OPEN" (t.j. Door_Status == 1) a ak je
-// akýkoľvek iný switch v stave "Active" (myslené Switch_e% == 1) tak sa dvere zavrú aby mohol výťah korektne pokračovať ďalej v jazde.
-// pokiaľ nieje žiaden iný switch "Active" tak dvere zostanú otvorené a výťah čaká na "privolanie"
-// následne sa pošle správa pre vykonávanie príslušneho smeru a nastavenie príslušnej Motor_Control premennej na hodnotu 1.
 void Last_Know_Movement_Setter() {
 	if (Last_Known_Movement == 1) {
 		Destination_Display = 0x01;

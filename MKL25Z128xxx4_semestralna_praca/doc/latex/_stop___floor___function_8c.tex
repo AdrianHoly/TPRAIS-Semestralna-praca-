@@ -1,0 +1,28 @@
+\hypertarget{_stop___floor___function_8c}{}\doxysection{source/\+Stop\+\_\+\+Floor\+\_\+\+Function.c File Reference}
+\label{_stop___floor___function_8c}\index{source/Stop\_Floor\_Function.c@{source/Stop\_Floor\_Function.c}}
+
+
+zastavenie vytahu na poschodi  
+
+
+{\ttfamily \#include $<$Stop\+\_\+\+Floor\+\_\+\+Function.\+h$>$}\newline
+\doxysubsection*{Functions}
+\begin{DoxyCompactItemize}
+\item 
+void \mbox{\hyperlink{_stop___floor___function_8c_aeba1eb8c2c4d94db5c7ffc54d5d4edd1}{Stop\+\_\+\+Floor}} ()
+\end{DoxyCompactItemize}
+
+
+\doxysubsection{Detailed Description}
+zastavenie vytahu na poschodi 
+
+//funkcia vytvorena pre zastavenie výťahu v prípade, že prechádza cez poschodie ktorého switch je v stave \char`\"{}\+Active\char`\"{} aj keď daný switch nieje zapísaný ako \char`\"{}\+Destination\char`\"{} 
+
+\doxysubsection{Function Documentation}
+\mbox{\Hypertarget{_stop___floor___function_8c_aeba1eb8c2c4d94db5c7ffc54d5d4edd1}\label{_stop___floor___function_8c_aeba1eb8c2c4d94db5c7ffc54d5d4edd1}} 
+\index{Stop\_Floor\_Function.c@{Stop\_Floor\_Function.c}!Stop\_Floor@{Stop\_Floor}}
+\index{Stop\_Floor@{Stop\_Floor}!Stop\_Floor\_Function.c@{Stop\_Floor\_Function.c}}
+\doxysubsubsection{\texorpdfstring{Stop\_Floor()}{Stop\_Floor()}}
+{\footnotesize\ttfamily void Stop\+\_\+\+Floor (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})}
+
+tvar funkcie ak sme prijalu správu od switchu pošlú sa údaje o aktuálnej polohe výťahu na displej výťahu ak je daný switch v stave \char`\"{}\+Active\char`\"{} tak sa pošle správa o zastavení prestavia sa Motor\+\_\+\+Control premenné na 0 po delayi sa pošle správa otvorenia dverí a prestaví sa Door\+\_\+\+Status na 1 ak sú iné switche v stave active tak po krátkom delayi sa pošle správa o zatvorení dverí ako posledné sa pošle správa o vypnúti LED v prípade, že výťah vykonal svoju funkciu na príslušno poschodí 

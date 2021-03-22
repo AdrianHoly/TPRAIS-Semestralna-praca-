@@ -5,6 +5,12 @@
  *      Author: Ado
  */
 
+/**
+ * @file    Premenne.c
+ * @brief   globalne premenne
+ *
+ */
+
 #include <Premenne.h>
 
 volatile uint8_t Sprava[10], Index = 0;

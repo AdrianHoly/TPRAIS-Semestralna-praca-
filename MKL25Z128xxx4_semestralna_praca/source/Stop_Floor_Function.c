@@ -4,19 +4,29 @@
  *  Created on: 17. 3. 2021
  *      Author: Ado
  */
+
+/**
+ * @file    Stop_Floor_Function.c
+ * @brief   zastavenie vytahu na poschodi
+ * @details //funkcia vytvorena pre zastavenie výťahu v prípade, že prechádza cez poschodie
+ * ktorého switch je v stave "Active" aj keď daný switch nieje zapísaný ako "Destination"
+ *
+ */
 #include <Stop_Floor_Function.h>
 
 
-//funkcia vytvorena pre zastavenie výťahu v prípade, že prechádza cez poschodie
-// ktorého switch je v stave "Active" aj keď daný switch nieje zapísaný ako "Destination"
 
-//tvar funkcie ak sme prijalu správu od switchu
-// pošlú sa údaje o aktuálnej polohe výťahu na displej výťahu
-// ak je daný switch v stave "Active" tak sa pošle správa o zastavení
-// prestavia sa Motor_Control premenné na 0
-// po delayi sa pošle správa otvorenia dverí a prestaví sa Door_Status na 1
-// ak sú iné switche v stave active tak po krátkom delayi sa pošle správa o zatvorení dverí
-// ako posledné sa pošle správa o vypnúti LED v prípade, že výťah vykonal svoju funkciu na príslušno poschodí
+
+ /*!
+  *  tvar funkcie ak sme prijalu správu od switchu
+  *   pošlú sa údaje o aktuálnej polohe výťahu na displej výťahu
+  *   ak je daný switch v stave "Active" tak sa pošle správa o zastavení
+  *   prestavia sa Motor_Control premenné na 0
+  *   po delayi sa pošle správa otvorenia dverí a prestaví sa Door_Status na 1
+  *   ak sú iné switche v stave active tak po krátkom delayi sa pošle správa o zatvorení dverí
+  *   ako posledné sa pošle správa o vypnúti LED v prípade, že výťah vykonal svoju funkciu na príslušno poschodí
+  */
+
 void Stop_Floor() {
 	if (Sprava[2] == 0xe0) {
 		Poloha_Actual = 0xe0;

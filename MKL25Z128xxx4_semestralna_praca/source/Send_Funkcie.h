@@ -4,6 +4,11 @@
  *  Created on: 15. 3. 2021
  *      Author: Ado
  */
+
+/**
+ * @file    Send_FUnkcie.h
+ * @brief   Send_Funkcie.c kniznica
+ */
 #include <Definicie.h>
 
 #ifndef SEND_FUNKCIE_H_

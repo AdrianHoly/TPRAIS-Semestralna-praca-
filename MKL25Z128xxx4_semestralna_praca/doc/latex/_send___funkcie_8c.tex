@@ -1,0 +1,112 @@
+\hypertarget{_send___funkcie_8c}{}\doxysection{source/\+Send\+\_\+\+Funkcie.c File Reference}
+\label{_send___funkcie_8c}\index{source/Send\_Funkcie.c@{source/Send\_Funkcie.c}}
+
+
+odosielacie funkcie  
+
+
+{\ttfamily \#include $<$Send\+\_\+\+Funkcie.\+h$>$}\newline
+\doxysubsection*{Functions}
+\begin{DoxyCompactItemize}
+\item 
+void \mbox{\hyperlink{_send___funkcie_8c_a48aa05241383fb1872fcca098e087a92}{Send\+\_\+\+ACK}} (uint8\+\_\+t Adresa\+\_\+\+Prijatej\+\_\+spravy)
+\item 
+void \mbox{\hyperlink{_send___funkcie_8c_ab9c6496c827aeeb95b9a55b01658db37}{Motor\+\_\+\+Up\+\_\+\+Movement}} ()
+\item 
+void \mbox{\hyperlink{_send___funkcie_8c_aa7d18204544028b5e644afb572543a89}{Motor\+\_\+\+Down\+\_\+\+Movement}} ()
+\item 
+void \mbox{\hyperlink{_send___funkcie_8c_af7e041e399aad76597246148d9aacdc1}{Motor\+\_\+\+Stop}} ()
+\item 
+void \mbox{\hyperlink{_send___funkcie_8c_a39dbf7e8c371ed1ecac27cc34bad0c10}{Door\+\_\+\+Open}} ()
+\item 
+void \mbox{\hyperlink{_send___funkcie_8c_a27fe5079c34dd84a514e61e09ff6c2eb}{Door\+\_\+\+Close}} ()
+\item 
+void \mbox{\hyperlink{_send___funkcie_8c_a69d798a355a3011cdd1f099f29b74490}{Display}} (uint8\+\_\+t Direction\+\_\+\+Display, uint8\+\_\+t Floor\+\_\+\+Display)
+\item 
+void \mbox{\hyperlink{_send___funkcie_8c_a632ba978dafa8ebdfa680886d225ce84}{Rozsviet\+\_\+\+LED\+\_\+\+OUT}} (uint8\+\_\+t Stlaceny\+\_\+\+Button)
+\item 
+void \mbox{\hyperlink{_send___funkcie_8c_a28e6f036d21d07daaaa911e7413de7dc}{Rozsviet\+\_\+\+LED\+\_\+\+IN}} (uint8\+\_\+t Stlaceny\+\_\+\+Button)
+\item 
+void \mbox{\hyperlink{_send___funkcie_8c_ab32311e325292706d51c257588d0fbb8}{Zhasni\+\_\+\+LED\+\_\+\+OUT}} (uint8\+\_\+t Prislusne\+\_\+\+Poschodie)
+\item 
+void \mbox{\hyperlink{_send___funkcie_8c_a00b22f2be90d6ae1dce5f02ec2f3768b}{Zhasni\+\_\+\+LED\+\_\+\+IN}} (uint8\+\_\+t Prislusne\+\_\+\+Poschodie)
+\end{DoxyCompactItemize}
+
+
+\doxysubsection{Detailed Description}
+odosielacie funkcie 
+
+funkcie pre odosielanie správ do aplikácie výťahu 
+
+\doxysubsection{Function Documentation}
+\mbox{\Hypertarget{_send___funkcie_8c_a69d798a355a3011cdd1f099f29b74490}\label{_send___funkcie_8c_a69d798a355a3011cdd1f099f29b74490}} 
+\index{Send\_Funkcie.c@{Send\_Funkcie.c}!Display@{Display}}
+\index{Display@{Display}!Send\_Funkcie.c@{Send\_Funkcie.c}}
+\doxysubsubsection{\texorpdfstring{Display()}{Display()}}
+{\footnotesize\ttfamily void Display (\begin{DoxyParamCaption}\item[{uint8\+\_\+t}]{Direction\+\_\+\+Display,  }\item[{uint8\+\_\+t}]{Floor\+\_\+\+Display }\end{DoxyParamCaption})}
+
+parametre predstavujú aktuálny smer (Hore/\+Dole) a aktuálne poschodie posielanie údajov na displej \mbox{\Hypertarget{_send___funkcie_8c_a27fe5079c34dd84a514e61e09ff6c2eb}\label{_send___funkcie_8c_a27fe5079c34dd84a514e61e09ff6c2eb}} 
+\index{Send\_Funkcie.c@{Send\_Funkcie.c}!Door\_Close@{Door\_Close}}
+\index{Door\_Close@{Door\_Close}!Send\_Funkcie.c@{Send\_Funkcie.c}}
+\doxysubsubsection{\texorpdfstring{Door\_Close()}{Door\_Close()}}
+{\footnotesize\ttfamily void Door\+\_\+\+Close (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})}
+
+zatvorenie dverí \mbox{\Hypertarget{_send___funkcie_8c_a39dbf7e8c371ed1ecac27cc34bad0c10}\label{_send___funkcie_8c_a39dbf7e8c371ed1ecac27cc34bad0c10}} 
+\index{Send\_Funkcie.c@{Send\_Funkcie.c}!Door\_Open@{Door\_Open}}
+\index{Door\_Open@{Door\_Open}!Send\_Funkcie.c@{Send\_Funkcie.c}}
+\doxysubsubsection{\texorpdfstring{Door\_Open()}{Door\_Open()}}
+{\footnotesize\ttfamily void Door\+\_\+\+Open (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})}
+
+otvorenie dverí \mbox{\Hypertarget{_send___funkcie_8c_aa7d18204544028b5e644afb572543a89}\label{_send___funkcie_8c_aa7d18204544028b5e644afb572543a89}} 
+\index{Send\_Funkcie.c@{Send\_Funkcie.c}!Motor\_Down\_Movement@{Motor\_Down\_Movement}}
+\index{Motor\_Down\_Movement@{Motor\_Down\_Movement}!Send\_Funkcie.c@{Send\_Funkcie.c}}
+\doxysubsubsection{\texorpdfstring{Motor\_Down\_Movement()}{Motor\_Down\_Movement()}}
+{\footnotesize\ttfamily void Motor\+\_\+\+Down\+\_\+\+Movement (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})}
+
+smerom na dol \mbox{\Hypertarget{_send___funkcie_8c_af7e041e399aad76597246148d9aacdc1}\label{_send___funkcie_8c_af7e041e399aad76597246148d9aacdc1}} 
+\index{Send\_Funkcie.c@{Send\_Funkcie.c}!Motor\_Stop@{Motor\_Stop}}
+\index{Motor\_Stop@{Motor\_Stop}!Send\_Funkcie.c@{Send\_Funkcie.c}}
+\doxysubsubsection{\texorpdfstring{Motor\_Stop()}{Motor\_Stop()}}
+{\footnotesize\ttfamily void Motor\+\_\+\+Stop (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})}
+
+zastavenie motora \mbox{\Hypertarget{_send___funkcie_8c_ab9c6496c827aeeb95b9a55b01658db37}\label{_send___funkcie_8c_ab9c6496c827aeeb95b9a55b01658db37}} 
+\index{Send\_Funkcie.c@{Send\_Funkcie.c}!Motor\_Up\_Movement@{Motor\_Up\_Movement}}
+\index{Motor\_Up\_Movement@{Motor\_Up\_Movement}!Send\_Funkcie.c@{Send\_Funkcie.c}}
+\doxysubsubsection{\texorpdfstring{Motor\_Up\_Movement()}{Motor\_Up\_Movement()}}
+{\footnotesize\ttfamily void Motor\+\_\+\+Up\+\_\+\+Movement (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})}
+
+\href{https://www.cs.cornell.edu/~tomf/notes/cps104/twoscomp.html}{\texttt{ https\+://www.\+cs.\+cornell.\+edu/$\sim$tomf/notes/cps104/twoscomp.\+html}} pouzity dvojkovy doplnok na jednotlive prevody som pouzil prog kalk. 0000 0000 0000 0000 0000 0000 0110 0100 //dec 100 // up 0 0 0 0 0 0 6 4 1111 1111 1111 1111 1111 1111 1001 1011 //spravena inverzia 1111 1111 1111 1111 1111 1111 1001 1100 // +1 F F F F F F 9 C // FF FF FF 9C // -\/100 // down
+
+posielanie správy na pohyb smerom na vrch \mbox{\Hypertarget{_send___funkcie_8c_a28e6f036d21d07daaaa911e7413de7dc}\label{_send___funkcie_8c_a28e6f036d21d07daaaa911e7413de7dc}} 
+\index{Send\_Funkcie.c@{Send\_Funkcie.c}!Rozsviet\_LED\_IN@{Rozsviet\_LED\_IN}}
+\index{Rozsviet\_LED\_IN@{Rozsviet\_LED\_IN}!Send\_Funkcie.c@{Send\_Funkcie.c}}
+\doxysubsubsection{\texorpdfstring{Rozsviet\_LED\_IN()}{Rozsviet\_LED\_IN()}}
+{\footnotesize\ttfamily void Rozsviet\+\_\+\+LED\+\_\+\+IN (\begin{DoxyParamCaption}\item[{uint8\+\_\+t}]{Stlaceny\+\_\+\+Button }\end{DoxyParamCaption})}
+
+rozsvietenie vnútorných LED \mbox{\Hypertarget{_send___funkcie_8c_a632ba978dafa8ebdfa680886d225ce84}\label{_send___funkcie_8c_a632ba978dafa8ebdfa680886d225ce84}} 
+\index{Send\_Funkcie.c@{Send\_Funkcie.c}!Rozsviet\_LED\_OUT@{Rozsviet\_LED\_OUT}}
+\index{Rozsviet\_LED\_OUT@{Rozsviet\_LED\_OUT}!Send\_Funkcie.c@{Send\_Funkcie.c}}
+\doxysubsubsection{\texorpdfstring{Rozsviet\_LED\_OUT()}{Rozsviet\_LED\_OUT()}}
+{\footnotesize\ttfamily void Rozsviet\+\_\+\+LED\+\_\+\+OUT (\begin{DoxyParamCaption}\item[{uint8\+\_\+t}]{Stlaceny\+\_\+\+Button }\end{DoxyParamCaption})}
+
+rozsvietenie vonkajších LED \mbox{\Hypertarget{_send___funkcie_8c_a48aa05241383fb1872fcca098e087a92}\label{_send___funkcie_8c_a48aa05241383fb1872fcca098e087a92}} 
+\index{Send\_Funkcie.c@{Send\_Funkcie.c}!Send\_ACK@{Send\_ACK}}
+\index{Send\_ACK@{Send\_ACK}!Send\_Funkcie.c@{Send\_Funkcie.c}}
+\doxysubsubsection{\texorpdfstring{Send\_ACK()}{Send\_ACK()}}
+{\footnotesize\ttfamily void Send\+\_\+\+ACK (\begin{DoxyParamCaption}\item[{uint8\+\_\+t}]{Adresa\+\_\+\+Prijatej\+\_\+spravy }\end{DoxyParamCaption})}
+
+každá funkcia je v tvare CRC8\+\_\+\+Data = dáta pre CRC8 funkciu v tvare podla zadania (Adresa prijímača, Adresa odosielateľa a dáta) veľkosť správy ukladám do premennej CRC8\+\_\+\+Data\+\_\+\+Length Packet posielanej správy = Start\+\_\+\+Byte/ Adresa prijimatela/ Adresa odosielateľa/ veľkosť dát / dáta / CRC8 LPSCI\+\_\+\+Write\+Blocking vpíše dáta do Tx Buffera.
+
+posielanie Acknowligmentu do aplikácie \mbox{\Hypertarget{_send___funkcie_8c_a00b22f2be90d6ae1dce5f02ec2f3768b}\label{_send___funkcie_8c_a00b22f2be90d6ae1dce5f02ec2f3768b}} 
+\index{Send\_Funkcie.c@{Send\_Funkcie.c}!Zhasni\_LED\_IN@{Zhasni\_LED\_IN}}
+\index{Zhasni\_LED\_IN@{Zhasni\_LED\_IN}!Send\_Funkcie.c@{Send\_Funkcie.c}}
+\doxysubsubsection{\texorpdfstring{Zhasni\_LED\_IN()}{Zhasni\_LED\_IN()}}
+{\footnotesize\ttfamily void Zhasni\+\_\+\+LED\+\_\+\+IN (\begin{DoxyParamCaption}\item[{uint8\+\_\+t}]{Prislusne\+\_\+\+Poschodie }\end{DoxyParamCaption})}
+
+zhasnutie vnútorných LED \mbox{\Hypertarget{_send___funkcie_8c_ab32311e325292706d51c257588d0fbb8}\label{_send___funkcie_8c_ab32311e325292706d51c257588d0fbb8}} 
+\index{Send\_Funkcie.c@{Send\_Funkcie.c}!Zhasni\_LED\_OUT@{Zhasni\_LED\_OUT}}
+\index{Zhasni\_LED\_OUT@{Zhasni\_LED\_OUT}!Send\_Funkcie.c@{Send\_Funkcie.c}}
+\doxysubsubsection{\texorpdfstring{Zhasni\_LED\_OUT()}{Zhasni\_LED\_OUT()}}
+{\footnotesize\ttfamily void Zhasni\+\_\+\+LED\+\_\+\+OUT (\begin{DoxyParamCaption}\item[{uint8\+\_\+t}]{Prislusne\+\_\+\+Poschodie }\end{DoxyParamCaption})}
+
+zhasnutie vonkajších LED 

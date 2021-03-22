@@ -1,0 +1,43 @@
+\hypertarget{_m_k_l25_z128xxx4__semestralna__praca_8c}{}\doxysection{source/\+MKL25\+Z128xxx4\+\_\+semestralna\+\_\+praca.c File Reference}
+\label{_m_k_l25_z128xxx4__semestralna__praca_8c}\index{source/MKL25Z128xxx4\_semestralna\_praca.c@{source/MKL25Z128xxx4\_semestralna\_praca.c}}
+
+
+Hlavný súbor.  
+
+
+{\ttfamily \#include \char`\"{}board.\+h\char`\"{}}\newline
+{\ttfamily \#include $<$Premenne.\+h$>$}\newline
+{\ttfamily \#include $<$Send\+\_\+\+Funkcie.\+h$>$}\newline
+{\ttfamily \#include $<$CRC8.\+h$>$}\newline
+{\ttfamily \#include $<$Delay.\+h$>$}\newline
+{\ttfamily \#include $<$Motor\+\_\+\+Go.\+h$>$}\newline
+{\ttfamily \#include $<$Stop\+\_\+\+Floor\+\_\+\+Function.\+h$>$}\newline
+{\ttfamily \#include $<$Led\+\_\+\+And\+\_\+\+Movement.\+h$>$}\newline
+\doxysubsection*{Functions}
+\begin{DoxyCompactItemize}
+\item 
+void \mbox{\hyperlink{_m_k_l25_z128xxx4__semestralna__praca_8c_a1b32411cb5eef5d5447981e6181f229d}{DEMO\+\_\+\+LPSCI\+\_\+\+IRQHandler}} (void)
+\item 
+\mbox{\Hypertarget{_m_k_l25_z128xxx4__semestralna__praca_8c_a840291bc02cba5474a4cb46a9b9566fe}\label{_m_k_l25_z128xxx4__semestralna__praca_8c_a840291bc02cba5474a4cb46a9b9566fe}} 
+int {\bfseries main} (void)
+\end{DoxyCompactItemize}
+
+
+\doxysubsection{Detailed Description}
+Hlavný súbor. 
+
+obsahuje funkciu pre naplnenie správy 
+
+\doxysubsection{Function Documentation}
+\mbox{\Hypertarget{_m_k_l25_z128xxx4__semestralna__praca_8c_a1b32411cb5eef5d5447981e6181f229d}\label{_m_k_l25_z128xxx4__semestralna__praca_8c_a1b32411cb5eef5d5447981e6181f229d}} 
+\index{MKL25Z128xxx4\_semestralna\_praca.c@{MKL25Z128xxx4\_semestralna\_praca.c}!DEMO\_LPSCI\_IRQHandler@{DEMO\_LPSCI\_IRQHandler}}
+\index{DEMO\_LPSCI\_IRQHandler@{DEMO\_LPSCI\_IRQHandler}!MKL25Z128xxx4\_semestralna\_praca.c@{MKL25Z128xxx4\_semestralna\_praca.c}}
+\doxysubsubsection{\texorpdfstring{DEMO\_LPSCI\_IRQHandler()}{DEMO\_LPSCI\_IRQHandler()}}
+{\footnotesize\ttfamily void DEMO\+\_\+\+LPSCI\+\_\+\+IRQHandler (\begin{DoxyParamCaption}\item[{void}]{ }\end{DoxyParamCaption})}
+
+funkcia, ktorá napĺňa samotnú správu. Volá sa pomocou interruptu. veľkosť správy je nastavená natvrdo (hodnota 4 (veľkost 5 kedže indexujem od 0)
+\begin{DoxyItemize}
+\item t.\+j. start byte/ adresa prijimaca / adresa odosielatela / dáta (pri väčšine pripadov 0)/\+CRC kód ) ako náhle dosiahne indexu hodnotu 4 tak sa nastaví globálna premenná Sprava\+\_\+\+Complete na hodnotu 1
+\end{DoxyItemize}
+
+k\+LPSCI\+\_\+\+Rx\+Data\+Reg\+Full\+Flag sa nastaví ak je Rx Data buffer plný 

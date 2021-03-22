@@ -1,0 +1,48 @@
+\hypertarget{_led___and___movement_8h}{}\doxysection{source/\+Led\+\_\+\+And\+\_\+\+Movement.h File Reference}
+\label{_led___and___movement_8h}\index{source/Led\_And\_Movement.h@{source/Led\_And\_Movement.h}}
+
+
+\mbox{\hyperlink{_led___and___movement_8c}{Led\+\_\+\+And\+\_\+\+Movement.\+c}} kniznica.  
+
+
+{\ttfamily \#include $<$Premenne.\+h$>$}\newline
+\doxysubsection*{Functions}
+\begin{DoxyCompactItemize}
+\item 
+void \mbox{\hyperlink{_led___and___movement_8h_ad43e02ad3ab1e03466b7a516be38521d}{LED\+\_\+and\+\_\+\+Switch\+\_\+\+Setter\+\_\+\+On}} ()
+\item 
+void \mbox{\hyperlink{_led___and___movement_8h_ac0b8db6fedefa0d158a887eb24688af6}{Set\+\_\+\+Destination}} ()
+\item 
+void \mbox{\hyperlink{_led___and___movement_8h_a3be0cc24cd58365510b941c00482aaba}{Last\+\_\+\+Know\+\_\+\+Movement\+\_\+\+Setter}} ()
+\end{DoxyCompactItemize}
+
+
+\doxysubsection{Detailed Description}
+\mbox{\hyperlink{_led___and___movement_8c}{Led\+\_\+\+And\+\_\+\+Movement.\+c}} kniznica. 
+
+
+
+\doxysubsection{Function Documentation}
+\mbox{\Hypertarget{_led___and___movement_8h_a3be0cc24cd58365510b941c00482aaba}\label{_led___and___movement_8h_a3be0cc24cd58365510b941c00482aaba}} 
+\index{Led\_And\_Movement.h@{Led\_And\_Movement.h}!Last\_Know\_Movement\_Setter@{Last\_Know\_Movement\_Setter}}
+\index{Last\_Know\_Movement\_Setter@{Last\_Know\_Movement\_Setter}!Led\_And\_Movement.h@{Led\_And\_Movement.h}}
+\doxysubsubsection{\texorpdfstring{Last\_Know\_Movement\_Setter()}{Last\_Know\_Movement\_Setter()}}
+{\footnotesize\ttfamily void Last\+\_\+\+Know\+\_\+\+Movement\+\_\+\+Setter (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})}
+
+funkcia vznikla za účelom zavretia dverí po tom čo výťah zastaví na príslušnom poschodí LKM values = 1 smer hore, 0 smer dole, 2 stop Motor\+\_\+\+Control premenne su pouzite ako korekcia aby sa neposielali spravy viackrát kedže táto funkcia nieje v maine ohraničená žiadnou podmienkou tak sa vykoná stále
+
+príklad\+: ak je LKM 1 (t.\+j. výťah išiel smerom hore), tak sa nastavia control premenné ostatných smerov na hodnotu 0 aby sme ich mohli do budúcnosti použiť ak je Motor\+\_\+\+Control príslušného smeru nastavená na 0 a dvere sú v stave \char`\"{}\+OPEN\char`\"{} (t.\+j. Door\+\_\+\+Status == 1) a ak je akýkoľvek iný switch v stave \char`\"{}\+Active\char`\"{} (myslené Switch\+\_\+e\% == 1) tak sa dvere zavrú aby mohol výťah korektne pokračovať ďalej v jazde. pokiaľ nieje žiaden iný switch \char`\"{}\+Active\char`\"{} tak dvere zostanú otvorené a výťah čaká na \char`\"{}privolanie\char`\"{} následne sa pošle správa pre vykonávanie príslušneho smeru a nastavenie príslušnej Motor\+\_\+\+Control premennej na hodnotu 1. \mbox{\Hypertarget{_led___and___movement_8h_ad43e02ad3ab1e03466b7a516be38521d}\label{_led___and___movement_8h_ad43e02ad3ab1e03466b7a516be38521d}} 
+\index{Led\_And\_Movement.h@{Led\_And\_Movement.h}!LED\_and\_Switch\_Setter\_On@{LED\_and\_Switch\_Setter\_On}}
+\index{LED\_and\_Switch\_Setter\_On@{LED\_and\_Switch\_Setter\_On}!Led\_And\_Movement.h@{Led\_And\_Movement.h}}
+\doxysubsubsection{\texorpdfstring{LED\_and\_Switch\_Setter\_On()}{LED\_and\_Switch\_Setter\_On()}}
+{\footnotesize\ttfamily void LED\+\_\+and\+\_\+\+Switch\+\_\+\+Setter\+\_\+\+On (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})}
+
+ak prijmem správu z tlačidla vonkajšieho alebo vnútorného terminálu tak sa prestavia hodnoty LED na príslušnom poschodí na 1 a tiež sa nastaví prislúchajúca premenná switch\+\_\+e\% na hodnotu 1 \mbox{\Hypertarget{_led___and___movement_8h_ac0b8db6fedefa0d158a887eb24688af6}\label{_led___and___movement_8h_ac0b8db6fedefa0d158a887eb24688af6}} 
+\index{Led\_And\_Movement.h@{Led\_And\_Movement.h}!Set\_Destination@{Set\_Destination}}
+\index{Set\_Destination@{Set\_Destination}!Led\_And\_Movement.h@{Led\_And\_Movement.h}}
+\doxysubsubsection{\texorpdfstring{Set\_Destination()}{Set\_Destination()}}
+{\footnotesize\ttfamily void Set\+\_\+\+Destination (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})}
+
+na začiatku sa nastaví hodnota Last\+\_\+\+Known\+\_\+\+Movement na hodnotu 2 (t.\+j. stop pohyb) tento krok som spravil v dôsledku korekcie funkcie, ku ktorej dochádzalo hlavne ked bolo stlačených viacej tlačidiel naraz (hlavne v iných smeroch)
+
+(Switch\+\_\+e4 == 1 \&\& Last\+\_\+\+Known\+\_\+\+Movement == 2 ) ak je aktívny switch a zároveň Last\+\_\+\+Known\+\_\+\+Movement je na hodnote 2 ak by podmienka nezahrnovala LKM podmienku, tak pri dalsej podmienke by bolo možné prebiť aktuálny smer výťahu, čo by malo za následok zastavenie výťahu 

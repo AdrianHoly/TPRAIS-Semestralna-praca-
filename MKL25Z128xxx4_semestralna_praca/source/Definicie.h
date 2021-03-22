@@ -5,7 +5,12 @@
  *      Author: Ado
  */
 
-// V tejto knižnici sú umiestnené základné includy a definície pre prerušenie a UART
+/**
+ * @file    Definicie.h
+ * @brief   kniznica definicii
+ * @details V tejto knižnici sú umiestnené základné includy a definície pre prerušenie a UART
+ */
+
 #include "peripherals.h"
 #include "pin_mux.h"
 #include "clock_config.h"

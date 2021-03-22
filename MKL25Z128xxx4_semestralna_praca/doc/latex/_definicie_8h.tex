@@ -1,0 +1,48 @@
+\hypertarget{_definicie_8h}{}\doxysection{source/\+Definicie.h File Reference}
+\label{_definicie_8h}\index{source/Definicie.h@{source/Definicie.h}}
+
+
+kniznica definicii  
+
+
+{\ttfamily \#include \char`\"{}peripherals.\+h\char`\"{}}\newline
+{\ttfamily \#include \char`\"{}pin\+\_\+mux.\+h\char`\"{}}\newline
+{\ttfamily \#include \char`\"{}clock\+\_\+config.\+h\char`\"{}}\newline
+{\ttfamily \#include \char`\"{}MKL25\+Z4.\+h\char`\"{}}\newline
+{\ttfamily \#include \char`\"{}fsl\+\_\+debug\+\_\+console.\+h\char`\"{}}\newline
+{\ttfamily \#include $<$fsl\+\_\+lpsci.\+h$>$}\newline
+{\ttfamily \#include $<$stdbool.\+h$>$}\newline
+{\ttfamily \#include $<$stdio.\+h$>$}\newline
+\doxysubsection*{Macros}
+\begin{DoxyCompactItemize}
+\item 
+\mbox{\Hypertarget{_definicie_8h_a748e69d615c835d8d9ae5f98af570532}\label{_definicie_8h_a748e69d615c835d8d9ae5f98af570532}} 
+\#define {\bfseries DEMO\+\_\+\+LPSCI}~UART0
+\item 
+\mbox{\Hypertarget{_definicie_8h_a0b3afd1134e408b124f3eda7abae56c4}\label{_definicie_8h_a0b3afd1134e408b124f3eda7abae56c4}} 
+\#define {\bfseries DEMO\+\_\+\+LPSCI\+\_\+\+CLKSRC}~k\+CLOCK\+\_\+\+Core\+Sys\+Clk
+\item 
+\mbox{\Hypertarget{_definicie_8h_a17ab487c275d39174ea8931961bdbb5d}\label{_definicie_8h_a17ab487c275d39174ea8931961bdbb5d}} 
+\#define {\bfseries DEMO\+\_\+\+LPSCI\+\_\+\+CLK\+\_\+\+FREQ}~CLOCK\+\_\+\+Get\+Freq(k\+CLOCK\+\_\+\+Core\+Sys\+Clk)
+\item 
+\mbox{\Hypertarget{_definicie_8h_a7055dad0bec420e4f5001d107f53ca5d}\label{_definicie_8h_a7055dad0bec420e4f5001d107f53ca5d}} 
+\#define {\bfseries DEMO\+\_\+\+LPSCI\+\_\+\+IRQn}~UART0\+\_\+\+IRQn
+\item 
+\mbox{\Hypertarget{_definicie_8h_ac756bf9a6d777533e9e1b08c7f0abf29}\label{_definicie_8h_ac756bf9a6d777533e9e1b08c7f0abf29}} 
+\#define {\bfseries DEMO\+\_\+\+LPSCI\+\_\+\+IRQHandler}~UART0\+\_\+\+IRQHandler
+\item 
+\mbox{\Hypertarget{_definicie_8h_ac80ebe338c37db364ca8342f00d72e35}\label{_definicie_8h_ac80ebe338c37db364ca8342f00d72e35}} 
+\#define {\bfseries Sprava\+\_\+\+Ack}~0xa1
+\item 
+\mbox{\Hypertarget{_definicie_8h_a0c143198e9ff5137a988bc44f96f9c9f}\label{_definicie_8h_a0c143198e9ff5137a988bc44f96f9c9f}} 
+\#define {\bfseries Sprava\+\_\+\+Data}~0xa0
+\item 
+\mbox{\Hypertarget{_definicie_8h_a86b6b5338c57f231b52cdbbf53093ed4}\label{_definicie_8h_a86b6b5338c57f231b52cdbbf53093ed4}} 
+\#define {\bfseries Adresa\+\_\+\+MCU}~0x00
+\end{DoxyCompactItemize}
+
+
+\doxysubsection{Detailed Description}
+kniznica definicii 
+
+V tejto knižnici sú umiestnené základné includy a definície pre prerušenie a UART 

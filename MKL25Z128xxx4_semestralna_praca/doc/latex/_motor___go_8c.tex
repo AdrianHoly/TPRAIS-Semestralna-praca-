@@ -1,0 +1,40 @@
+\hypertarget{_motor___go_8c}{}\doxysection{source/\+Motor\+\_\+\+Go.c File Reference}
+\label{_motor___go_8c}\index{source/Motor\_Go.c@{source/Motor\_Go.c}}
+
+
+funkcie pre smerovanie vytahu  
+
+
+{\ttfamily \#include $<$Motor\+\_\+\+Go.\+h$>$}\newline
+\doxysubsection*{Functions}
+\begin{DoxyCompactItemize}
+\item 
+int \mbox{\hyperlink{_motor___go_8c_a77965239444970f6903ced15c90090f6}{Motor\+\_\+\+Go\+\_\+\+To\+\_\+0}} (uint8\+\_\+t Par\+\_\+\+Poloha\+\_\+\+Actual)
+\item 
+\mbox{\Hypertarget{_motor___go_8c_a989c9fe77092f919b89a8bf293e366a4}\label{_motor___go_8c_a989c9fe77092f919b89a8bf293e366a4}} 
+int {\bfseries Motor\+\_\+\+Go\+\_\+\+To\+\_\+1} (uint8\+\_\+t Par\+\_\+\+Poloha\+\_\+\+Actual)
+\item 
+\mbox{\Hypertarget{_motor___go_8c_a82b51ee1e7b0880c9a5ecf208abb6961}\label{_motor___go_8c_a82b51ee1e7b0880c9a5ecf208abb6961}} 
+int {\bfseries Motor\+\_\+\+Go\+\_\+\+To\+\_\+2} (uint8\+\_\+t Par\+\_\+\+Poloha\+\_\+\+Actual)
+\item 
+\mbox{\Hypertarget{_motor___go_8c_a1a35f2264e9a8778f3c3262178588f9e}\label{_motor___go_8c_a1a35f2264e9a8778f3c3262178588f9e}} 
+int {\bfseries Motor\+\_\+\+Go\+\_\+\+To\+\_\+3} (uint8\+\_\+t Par\+\_\+\+Poloha\+\_\+\+Actual)
+\item 
+\mbox{\Hypertarget{_motor___go_8c_a6252ee27db4bda15194440315dcdef3e}\label{_motor___go_8c_a6252ee27db4bda15194440315dcdef3e}} 
+int {\bfseries Motor\+\_\+\+Go\+\_\+\+To\+\_\+4} (uint8\+\_\+t Par\+\_\+\+Poloha\+\_\+\+Actual)
+\end{DoxyCompactItemize}
+
+
+\doxysubsection{Detailed Description}
+funkcie pre smerovanie vytahu 
+
+následujúce funkcie riadia pohyb výťahu 
+
+\doxysubsection{Function Documentation}
+\mbox{\Hypertarget{_motor___go_8c_a77965239444970f6903ced15c90090f6}\label{_motor___go_8c_a77965239444970f6903ced15c90090f6}} 
+\index{Motor\_Go.c@{Motor\_Go.c}!Motor\_Go\_To\_0@{Motor\_Go\_To\_0}}
+\index{Motor\_Go\_To\_0@{Motor\_Go\_To\_0}!Motor\_Go.c@{Motor\_Go.c}}
+\doxysubsubsection{\texorpdfstring{Motor\_Go\_To\_0()}{Motor\_Go\_To\_0()}}
+{\footnotesize\ttfamily int Motor\+\_\+\+Go\+\_\+\+To\+\_\+0 (\begin{DoxyParamCaption}\item[{uint8\+\_\+t}]{Par\+\_\+\+Poloha\+\_\+\+Actual }\end{DoxyParamCaption})}
+
+Príklad\+: Ak je aktuálna poloha Switch\+E4, a bola zavolaná funkcia Motor\+\_\+\+Go\+\_\+\+To\+\_\+0 tak podľa tejto podmienky vieme určiť ktorým smerom sa má vydať v tomto prípade smerom dole. každá funkcia vracia hodnotu podľa podmienky a hodnoty predstavujú Last\+\_\+\+Known\+\_\+\+Movement (t.\+j. 1 smer hore, 0 smer dole) 
